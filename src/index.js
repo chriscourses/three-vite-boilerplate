@@ -9,7 +9,7 @@ let camera
 let renderer
 let animationId
 let controls
-let cube
+let torusKnot
 
 function init() {
   scene = new THREE.Scene()
@@ -20,16 +20,16 @@ function init() {
     1,
     10000
   )
-  camera.position.z = 1000
+  camera.position.z = 50
 
-  cube = new THREE.Mesh(
-    new THREE.BoxGeometry(200, 200, 200),
+  torusKnot = new THREE.Mesh(
+    new THREE.TorusKnotGeometry(10, 3, 100, 16),
     new THREE.RawShaderMaterial({
       vertexShader: vertex,
       fragmentShader: fragment,
     })
   )
-  scene.add(cube)
+  scene.add(torusKnot)
 
   renderer = new THREE.WebGLRenderer({ antialias: true })
   renderer.setSize(window.innerWidth, window.innerHeight)
@@ -42,8 +42,8 @@ function animate() {
   animationId = requestAnimationFrame(animate)
   renderer.render(scene, camera)
 
-  cube.rotation.x += 0.04
-  cube.rotation.y += 0.02
+  torusKnot.rotation.x += 0.01
+  torusKnot.rotation.y += 0.01
 }
 
 init()
